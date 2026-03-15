@@ -1,0 +1,32 @@
+
+# Disable password-based login (require key auth only)
+PasswordAuthentication no
+
+# Disable root login entirely
+PermitRootLogin no
+
+# Enable public key authentication
+PubkeyAuthentication yes
+
+# Path to authorized keys file
+AuthorizedKeysFile .ssh/authorized_keys
+
+ChallengeResponseAuthentication no
+UsePAM yes
+PermitEmptyPasswords no
+
+
+# Only allow SSH protocol 2
+Protocol 2
+
+# Default port (change to a non-standard port for extra security)
+Port 22
+
+
+# Limit login attempts
+MaxAuthTries 3
+MaxSessions 10
+LogLevel VERBOSE
+
+#MAKE SURE TO ADD WWHEN COMP STARTS
+AllowUsers 

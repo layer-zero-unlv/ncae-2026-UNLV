@@ -1,0 +1,25 @@
+# ONLY APPEND TO END OF EXISTING
+
+zone "team<T>.net" IN {
+    type master;
+    file "/etc/bind/zones/forward.team<T>.net";
+    allow-update { none; };
+};
+
+zone "<T>.168.192.in-addr.arpa" IN {
+    type master;
+    file "/etc/bind/zones/reverse.team<T>.net";
+    allow-update { none; };
+};
+
+zone "team<T>.ncaecybergames.org" IN {
+    type master;
+    file "/etc/bind/zones/forward.ncaecybergames.org";
+    allow-update { none; };
+};
+
+zone "18.172.in-addr.arpa" IN {
+    type master;
+    file "/etc/bind/zones/reverse.ncaecybergames.org";
+    allow-update { none; };
+};

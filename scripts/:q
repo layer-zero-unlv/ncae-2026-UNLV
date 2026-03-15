@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/vars.sh"
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Run with sudo."
+  exit 1
+fi
+
+if ! command -v apt >/dev/null 2>&1; then
+  echo "This script is meant for Ubuntu or Debian with apt."
+  exit 1
+fi
+
+STAMP="$(date +%F_%H%M%S)"
+SAVE_DIR="$BACKUP_DIR/db_$STAMP"
+mkdir -p "$SAVE_DIR"
+
+cp -a /etc/ssh "$SAVE_DIR/" 2>/dev/null
+cp -a /etc/postgresql "$SAVE_DIR/" 2>/dev/null
+cp -a /var/lib/postgresql "$SAVE_DIR/" 2>/dev/null
+
+if id postgres >/dev/null 2>&1; then
+  sudo -u postgres pg_dumpall > "$SAVE_DIR/pg_dumpall.sql" 2>/dev/null
+fi
+
+read -p "Change passwords for root and users in users.txt? (y/n): " ans
+if [ "$ans" = "y" ]; then
+  read -sp "Enter new password: " NEW_PASS
+  echo ""
+  echo "root:$NEW_PASS" | chpasswd
+  if [ -f "$US

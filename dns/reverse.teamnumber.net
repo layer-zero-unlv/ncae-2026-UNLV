@@ -1,0 +1,13 @@
+$TTL 86400
+@   IN  SOA team<T>.net. root.team<T>.net. (
+            1          ; Serial
+            604800     ; Refresh
+            86400      ; Retry
+            2419200    ; Expire
+            86400 )    ; Negative Cache TTL
+
+@   IN  NS  ns1.
+
+12  IN  PTR ns1.team<T>.net.
+5   IN  PTR www.team<T>.net.
+7   IN  PTR db.team<T>.net.
